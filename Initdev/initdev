@@ -1,0 +1,57 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]
+  then
+    echo "Expected arguments, please check the help : initdev –help"
+    exit 1
+fi
+
+if [ $# -eq 1 ]
+  then
+    if [[ $1 == "-help" ]]; then
+        echo "
+            — Name : initdev est une  application quelle est faite pour crée une arborecence il lui  faut comme enter d'insérer un nom de votre application et en plus le type du langage utiliser plus le type de license  .
+            — Syntax : ./initdev <nom-project> <type-de-langage ou type de license> .
+            — args : -C : pour un fichier en langage C.
+                     -C++ : pour un fichier en langage C ++.
+                     -PY : pour un fichier en langage python.
+                     -Latex : pour un fichier de type la latex.
+                     - GPL : pour une Licence de Type GPL.
+                     -MIT : pour unelicence de type MIT.
+            — author : AITBOUALI TAREK , tarekaitbouali@gmail.com "
+    else
+mkdir $1
+mkdir $1/bin
+mkdir $1/Licenses
+mkdir $1/Makfiles
+mkdir $1/Sources
+touch $1/install.sh
+touch $1/Licences
+touch $1/makefile
+
+case "$2" in
+        "-C") cp ./sources/main.c $1/main.c
+        ;;
+        "-C++") cp ./sources/main.cpp $1/main.cpp
+        ;;
+        "-CPP") cp ./sources/main.cpp $1/main.cpp
+        ;;
+        "-Py") cp ./sources/main.py $1/main.py
+        ;;
+        "-Latex") cp ./sources/latexMin.tex $1/main.tex
+        ;;
+        "-BEAMER") cp ./sources/beamer.tex $1/main.tex
+        ;;
+        "-GPL") cp ./licenses/GPL $1/LICENSE
+	;;
+	"-MIT") cp ./licenses/MIT $1/LICENSE
+ 	;;
+
+       *) 
+        echo "Uknown arguments, please check the help : initdev –help"
+          
+        exit 1
+    esac
+    
+    touch $1/main;
+exit 0
